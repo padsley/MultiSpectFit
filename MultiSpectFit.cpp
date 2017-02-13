@@ -9,7 +9,7 @@ int main()
     
     //Get histograms
     //For now doing this with just one file
-    TFile *finTemp = TFile::Open("/home/padsley/data/19Fpp/Analysis/Alpha0CoincidenceSpectra.root");
+    TFile *finTemp = TFile::Open("Alpha0CoincidenceSpectra.root");
     TH1F *hExAlpha0 = (TH1F*)finTemp->FindObjectAny("hExAlpha0");
     NumberOfHistos++;
     
@@ -115,6 +115,8 @@ int main()
     gMinuit->SetPrintLevel(0);
     gMinuit->mnexcm("MIGRAD",0,0,ierflg);
 
+    
+    TF1 **FitFunctionPlots = new TF1*[NumberOfHistos];
     //Save the information to the output file
     TFile *fout = new TFile("output.root","RECREATE");
     for(unsigned int i=0;i<NumberOfHistos;i++)histos[i]->Write();
